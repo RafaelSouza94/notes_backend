@@ -33,9 +33,9 @@ const requestLogger = (request, response, next) => {
 	next()
 }
 
+app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
-app.use(cors)
 
 app.get('/', (req, res) => {
 	res.send('<h1>Hello World!</h1>')
