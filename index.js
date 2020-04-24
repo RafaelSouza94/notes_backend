@@ -52,7 +52,15 @@ app.get('/api/notes', (req, res) => {
 
 app.get('/api/notes/:id', (request, response) => {
 	Note.findById(request.params.id).then(note => {
-		response.json(note.toJSON())
+		if (note){
+			response.json(note.toJSON())
+		} else {
+			response.status(404).end()
+		}
+	})
+	.catch(error => {
+		console.log(error);
+		response.status(400).send({ Error: 'Malformed id' })
 	})		
 })
 
